@@ -48,19 +48,21 @@
 
     <!-- Home -->
     <section id="home">
-      <img
-        src="./imgs/home/Profile_2.jpg"
-        alt="HoSeong's profile photo"
-        class="home__avatar"
-      />
-      <h1 class="home__title">
-        Hello, <br />
-        I'm Undefined Coder
-      </h1>
-      <h2 class="home__description">
-        A new developer who dreams of becoming a full-stack developer
-      </h2>
-      <button class="home__contact">Contact Me</button>
+      <div class="home__container">
+        <img
+          src="./imgs/home/Profile_2.jpg"
+          alt="HoSeong's profile photo"
+          class="home__avatar"
+        />
+        <h1 class="home__title">
+          Hello, <br />
+          I'm Undefined Coder
+        </h1>
+        <h2 class="home__description">
+          A new developer who dreams of becoming a full-stack developer
+        </h2>
+        <button class="home__contact" data-link="#contact">Contact Me</button>
+      </div>
     </section>
 
     <!-- About -->
@@ -308,5 +310,10 @@
         2020 Undefined Coder HoSeong - All rights reserved
       </p>
     </section>
+
+    <!-- Arrow Up Button -->
+    <button id="arrow-up">
+      <i class="fas fa-arrow-up"></i>
+    </button>
   </body>
 </html>

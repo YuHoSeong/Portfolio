@@ -14,13 +14,45 @@ window.onload = function () {
   // Handle scrolling when tapping on the navbar menu
   const navbarMenu = document.querySelector('.navbar__meun');
   navbarMenu.addEventListener('click', (event) => {
-    console.log(event.target.dataset.link);
     const target = event.target;
     const link = target.dataset.link;
     if (link == null) {
       return;
     }
-    const scrollTo = document.querySelector(link);
-    scrollTo.scrollIntoView({ behavior: 'smooth' });
+    scrollIntoView(link);
   });
+
+  // Handle click on "contact me" button on home
+  const homeContact = document.querySelector('.home__contact');
+  homeContact.addEventListener('click', () => {
+    scrollIntoView('#contact');
+  });
+
+  // Make home slowly fade to transparent as the window scrolls dwon
+  const home = document.querySelector('.home__container');
+  const homeHeight = home.getBoundingClientRect().height;
+  document.addEventListener('scroll', () => {
+    home.style.opacity = 1 - window.scrollY / homeHeight;
+  });
+
+  // Show "arrow up" button when scrolling down
+  const arrowUp = document.querySelector('#arrow-up');
+  document.addEventListener('scroll', () => {
+    if (window.scrollY > homeHeight / 2) {
+      arrowUp.classList.add('visible');
+    } else {
+      arrowUp.classList.remove('visible');
+    }
+  });
+
+  // Handle click on the "arrow up" button
+  arrowUp.addEventListener('click', () => {
+    scrollIntoView('#home');
+  });
+
+  // scrollIntoView(selector)
+  function scrollIntoView(selector) {
+    const scrollTo = document.querySelector(selector);
+    scrollTo.scrollIntoView({ behavior: 'smooth' });
+  }
 };
