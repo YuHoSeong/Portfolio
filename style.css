@@ -40,7 +40,7 @@
 
 body {
   margin: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   cursor: default;
 }
 
@@ -95,12 +95,20 @@ p {
 
 /* Navbar */
 #navbar {
+  width: 100%;
+  position: fixed;
   display: flex;
   justify-content: space-between;
-  background-color: var(--color-pink);
+  background-color: transparent;
   align-items: center;
   color: var(--color-white);
   padding: 16px;
+  transition: all var(--animation-duration) ease-in-out;
+  z-index: 1;
+}
+
+#navbar.navbar--dark {
+  background-color: var(--color-pink);
 }
 
 .navbar__logo {
@@ -145,9 +153,10 @@ p {
 
 /* Home */
 #home {
-  background: center/cover no-repeat url("imgs/home/home_background.png");
+  background: center/cover no-repeat url('imgs/home/home_background.png');
   text-align: center;
   padding: 40px;
+  padding-top: 100px;
 }
 
 .home__avatar {
@@ -392,7 +401,7 @@ p {
 }
 
 .project__description h3:after {
-  content: "";
+  content: '';
   display: block;
   position: relative;
   margin: auto;
