@@ -126,6 +126,15 @@ p {
   background-color: var(--color-pink);
 }
 
+.navbar__toggle-btn {
+  position: absolute;
+  right: 32px;
+  top: 21px;
+  font-size: 24px;
+  color: var(--color-white);
+  display: none;
+}
+
 /* Home */
 #home {
   background: center/cover no-repeat url("imgs/home/home_background.png");
@@ -174,6 +183,7 @@ p {
 .about__majors {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 80px 0;
 }
 
@@ -410,4 +420,49 @@ p {
   transform: scale(1.1);
   color: var(--color-yellow);
   transition: all var(--animation-duration) ease-in;
+}
+
+/* For below 768px screen width */
+@media screen and (max-width: 768px) {
+  .navbar__toggle-btn {
+    display: block;
+  }
+
+  #navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar__meun {
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    display: none;
+  }
+
+  .about__majors {
+    flex-direction: column;
+    margin: 40px 0;
+  }
+
+  .major {
+    margin: 20px 0;
+  }
+
+  .job {
+    flex-direction: column;
+    margin-bottom: 24px;
+  }
+
+  .job__description {
+    text-align: center;
+  }
+
+  .skillset {
+    flex-direction: column;
+  }
+
+  .project {
+    flex-grow: 1;
+  }
 }
