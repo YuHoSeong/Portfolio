@@ -8,6 +8,7 @@
   --color-dark-grey: #4d4d4d;
   --color-grey: #616161;
   --color-light-grey: #7c7979;
+  --color-green: #0ecdba;
   --color-blue: #73aace;
   --color-yellow: #fff7d1;
   --color-orange: #feb546;
@@ -96,7 +97,7 @@ p {
 #navbar {
   display: flex;
   justify-content: space-between;
-  background-color: var(--color-dark-pink);
+  background-color: var(--color-pink);
   align-items: center;
   color: var(--color-white);
   padding: 16px;
