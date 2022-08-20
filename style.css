@@ -96,7 +96,6 @@ p {
 /* Navbar */
 #navbar {
   width: 100%;
-  height: 72px;
   position: fixed;
   display: flex;
   justify-content: space-between;
@@ -408,7 +407,7 @@ p {
 }
 
 .project__description h3 {
-  color: var(--color-white);
+  color: var(--color-orange);
 }
 
 .project__description h3:after {
@@ -417,7 +416,7 @@ p {
   position: relative;
   margin: auto;
   margin-top: 8px;
-  width: 25px;
+  width: 50px;
   height: 2px;
   background-color: var(--color-dark-white);
 }
@@ -482,7 +481,11 @@ p {
   #navbar {
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
+    background-color: var(--color-pink);
+  }
+
+  .navbar__logo {
+    padding: 16px 0;
   }
 
   .navbar__meun {
@@ -490,6 +493,11 @@ p {
     text-align: center;
     width: 100%;
     display: none;
+    margin: 3px 0;
+  }
+
+  .navbar__meun.open {
+    display: block;
   }
 
   .about__majors {
