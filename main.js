@@ -12,15 +12,87 @@ window.onload = function () {
   });
 
   // Handle scrolling when tapping on the navbar menu
-  const navbarMenu = document.querySelector(".navbar__meun");
+  const navbarMenu = document.querySelector(".navbar__menu");
   navbarMenu.addEventListener("click", (event) => {
     const target = event.target;
+    console.log(target);
     const link = target.dataset.link;
     if (link == null) {
       return;
     }
     navbarMenu.classList.remove("open");
     scrollIntoView(link);
+  });
+
+  // Navbar menu actived for scrolling
+  // 1. section 요소 가져오기
+  // 2. 요소들을 obverse하기
+  // 3. 보여지는 색션에 해당하는 아이템 활성화하기
+  const sections = document.querySelectorAll("section");
+  const navItems = document.querySelectorAll(".navbar__menu__item");
+  const sectionIds = [];
+  navItems.forEach((item) => sectionIds.push(item.dataset.link));
+
+  let selectedNavIndex = 0;
+  let selectedNavItem = navItems[0];
+  /**
+   * 이전 selecteditem의 active를 삭제하고 현재 selecteditem의 active를 추가
+   * @param {navbar__menu__Item} selected
+   */
+  function selectNavItem(selected) {
+    selectedNavItem.classList.remove("active");
+    selectedNavItem = selected;
+    selectedNavItem.classList.add("active");
+  }
+
+  // 2. observe : section 요소를 observe하기
+  const observerOptions = {
+    root: null,
+    rootMagin: "0px",
+    threshold: 0.3,
+  };
+  const observerCallback = (entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting && entry.intersectionRatio > 0) {
+        const index = sectionIds.indexOf(`#${entry.target.id}`);
+        if (entry.boundingClientRect.y < 0) {
+          selectedNavIndex = index + 1;
+        } else {
+          selectedNavIndex = index - 1;
+        }
+      }
+    });
+  };
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+  sections.forEach((section) => {
+    observer.observe(section);
+  });
+
+  // 3. wheel : navbar item selected
+  window.addEventListener("wheel", (e) => {
+    if (window.scrollY === 0) {
+      selectedNavIndex = 0;
+    } else if (
+      window.scrollY + window.innerHeight ===
+      document.body.clientHeight
+    ) {
+      selectedNavIndex = navItems.length - 1;
+    }
+    selectNavItem(navItems[selectedNavIndex]);
+  });
+  // 4. keyup -> scroll : navbar item selected
+  window.addEventListener("keyup", (e) => {
+    window.addEventListener("scroll", (e) => {
+      if (window.scrollY === 0) {
+        selectedNavIndex = 0;
+      } else if (
+        window.scrollY + window.innerHeight ===
+        document.body.clientHeight
+      ) {
+        selectedNavIndex = navItems.length - 1;
+      }
+      selectNavItem(navItems[selectedNavIndex]);
+    });
   });
 
   // Navbar toggle button for small screen
@@ -89,8 +161,13 @@ window.onload = function () {
   });
 
   // scrollIntoView(selector)
+  /**
+   * 화면 이동하려는 querySelector 지정
+   * @param {querySelector} selector
+   */
   function scrollIntoView(selector) {
     const scrollTo = document.querySelector(selector);
     scrollTo.scrollIntoView({ behavior: "smooth" });
+    selectNavItem(navItems[sectionIds.indexOf(selector)]);
   }
 };
